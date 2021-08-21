@@ -42,10 +42,10 @@ struct boot_services {
     void *reserved;
     status (*register_protocol_notify)(guid *protocol, event event, void *registration);
     status (*locate_handle)(locate_search_type search_type, guid *protocol, void *search_key, usz *buffer_size, handle *buffer);
-    status (*locate_device_path)(guid *protocol, protocols::device_path_protocol **device_path, handle *device);
+    status (*locate_device_path)(guid *protocol, protocols::device_path **device_path, handle *device);
     status (*install_configuration_table)(guid *guid, void *table);
 
-    status (*load_image)(bool boot_policy, handle parent_image_handle, protocols::device_path_protocol **device_path, void *source_buffer, usz source_size, handle *image_handle);
+    status (*load_image)(bool boot_policy, handle parent_image_handle, protocols::device_path **device_path, void *source_buffer, usz source_size, handle *image_handle);
     status (*start_image)(handle image_handle, usz *exit_data_size, c16 **exit_data);
     status (*exit)(handle image_handle, status exit_status, usz exit_data_size, c16 exit_data);
     status (*unload_image)(handle image_handle);
@@ -55,7 +55,7 @@ struct boot_services {
     status (*stall)(usz microseconds);
     status (*set_watchdog_timer)(usz timeout, u64 watchdog_code, usz data_size, c16 *watchdog_data);
 
-    status (*connect_controller)(handle controller_handle, handle *driver_image_handle, protocols::device_path_protocol *remaining_device_path, bool recursive); 
+    status (*connect_controller)(handle controller_handle, handle *driver_image_handle, protocols::device_path *remaining_device_path, bool recursive); 
     status (*disconnect_controller)(handle controller_handle, handle driver_image_handle, handle child_handle);
 
     status (*open_protocol)(handle open_handle, guid *protocol, void **interface, handle agent_handle, handle controller_handle, u32 attributes);

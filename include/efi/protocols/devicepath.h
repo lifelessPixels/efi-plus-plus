@@ -83,7 +83,7 @@ enum class device_path_bios_boot_specification_subtype : u8 {
     bios_boot_specification_version_1_01 = 0x01
 };
 
-struct device_path_protocol {
+struct device_path {
     u8 type;
     u8 sub_type;
     u16 length;
@@ -92,28 +92,28 @@ struct device_path_protocol {
 };
 
 struct device_path_utilities {
-    usz (*get_device_path_size)(device_path_protocol *device_path);
-    device_path_protocol *(*get_duplicate_device_path)(device_path_protocol *device_path);
-    device_path_protocol *(*append_device_path)(device_path_protocol *source1, device_path_protocol *source2);
-    device_path_protocol *(*append_device_node)(device_path_protocol *device_path, device_path_protocol *device_node);
-    device_path_protocol *(*append_device_path_instance)(device_path_protocol *device_path, device_path_protocol *device_path_instance);
-    device_path_protocol *(*get_next_device_path_instance)(device_path_protocol **device_path_instance, usz *device_path_instance_size);
-    bool *(*is_device_multi_instance)(device_path_protocol *device_path);
-    device_path_protocol *(*create_node)(u8 node_type, u8 node_sub_type, u16 node_length);
+    usz (*get_device_path_size)(device_path *device_path);
+    device_path *(*get_duplicate_device_path)(device_path *device_path);
+    device_path *(*append_device_path)(device_path *source1, device_path *source2);
+    device_path *(*append_device_node)(device_path *device_path_, device_path *device_node);
+    device_path *(*append_device_path_instance)(device_path *device_path_, device_path *device_path_instance);
+    device_path *(*get_next_device_path_instance)(device_path **device_path_instance, usz *device_path_instance_size);
+    bool *(*is_device_multi_instance)(device_path *device_path);
+    device_path *(*create_node)(u8 node_type, u8 node_sub_type, u16 node_length);
 
     static constexpr guid protocol_guid = {0x0379be4e, 0xd706, 0x437d, {0xb0, 0x37, 0xed, 0xb8, 0x2f, 0xb7, 0x72, 0xa4}};
 };
 
 struct device_path_to_text {
-    c16 *(*convert_device_node_to_text)(device_path_protocol *device_node, bool display_only, bool allow_shortcuts);
-    c16 *(*convert_device_path_to_text)(device_path_protocol *device_path, bool display_only, bool allow_shortcuts);
+    c16 *(*convert_device_node_to_text)(device_path *device_node, bool display_only, bool allow_shortcuts);
+    c16 *(*convert_device_path_to_text)(device_path *device_path, bool display_only, bool allow_shortcuts);
 
     static constexpr guid protocol_guid = {0x8b843e20, 0x8132, 0x4852, {0x90, 0xcc, 0x55, 0x1a, 0x4e, 0x4a, 0x7f, 0x1c}};
 };
 
 struct device_path_from_text {
-    device_path_protocol *(*convert_text_to_device_node)(c16 *text_device_node);
-    device_path_protocol *(*convert_path_to_device_node)(c16 *text_device_path);
+    device_path *(*convert_text_to_device_node)(c16 *text_device_node);
+    device_path *(*convert_path_to_device_node)(c16 *text_device_path);
 
     static constexpr guid protocol_guid = {0x5c99a21, 0xc70f, 0x4ad2, {0x8a, 0x5f, 0x35, 0xdf, 0x33, 0x43, 0xf5, 0x1e}};
 };
