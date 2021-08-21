@@ -3,7 +3,7 @@
 
 namespace efi::protocols {
     
-enum device_path_type : u8 {
+enum class device_path_type : u8 {
     hardware = 0x01,
     acpi = 0x02,
     messaging = 0x03,
@@ -12,12 +12,12 @@ enum device_path_type : u8 {
     end_of_path = 0x7f
 };
 
-enum device_path_end_subtype : u8 {
+enum class device_path_end_subtype : u8 {
     entire_path_end = 0xff,
     instance_end = 0x01
 };
 
-enum device_path_hardware_subtype : u8 {
+enum class device_path_hardware_subtype : u8 {
     pci = 0x01,
     pccard = 0x02,
     memory_mapped = 0x03,
@@ -26,14 +26,14 @@ enum device_path_hardware_subtype : u8 {
     bmc = 0x06
 };
 
-enum device_path_acpi_subtype : u8 {
+enum class device_path_acpi_subtype : u8 {
     acpi = 0x01,
     expanded_acpi = 0x02,
     acpi_adr = 0x03,
     nvdimm = 0x04
 };
 
-enum device_path_messagind_subtype : u8 {
+enum class device_path_messagind_subtype : u8 {
     atapi = 0x01,
     scsi = 0x02,
     fibre_channel = 0x03,
@@ -67,7 +67,7 @@ enum device_path_messagind_subtype : u8 {
     rest_service = 0x20 // NOTE: maybe an error in UEFI spec
 };
 
-enum device_path_media_subtype : u8 {
+enum class device_path_media_subtype : u8 {
     hard_drive = 0x01,
     cd_rom = 0x02,
     vendor = 0x03,
@@ -79,7 +79,7 @@ enum device_path_media_subtype : u8 {
     ram_disk = 0x09
 };
 
-enum device_path_bios_boot_specification_subtype : u8 {
+enum class device_path_bios_boot_specification_subtype : u8 {
     bios_boot_specification_version_1_01 = 0x01
 };
 
