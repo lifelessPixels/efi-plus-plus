@@ -32,6 +32,20 @@ struct guid {
     u8  data4[8];
 };
 
+struct time {
+    u16 year;
+    u8 month;
+    u8 day;
+    u8 hour;
+    u8 minute;
+    u8 second;
+    u8 padding1;
+    u32 nanosecond;
+    i16 time_zone;
+    u8 daylight;
+    u8 padding2;
+};
+
 using event_notify = void (*)(event event, void *context);
 
 enum class timer_delay {
