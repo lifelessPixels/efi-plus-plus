@@ -33,7 +33,7 @@ enum class device_path_acpi_subtype : u8 {
     nvdimm = 0x04
 };
 
-enum class device_path_messagind_subtype : u8 {
+enum class device_path_messaging_subtype : u8 {
     atapi = 0x01,
     scsi = 0x02,
     fibre_channel = 0x03,
