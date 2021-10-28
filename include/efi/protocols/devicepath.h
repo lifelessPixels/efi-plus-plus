@@ -2,90 +2,92 @@
 #include "../basetypes.h"
 
 namespace efi::protocols {
-    
-enum class device_path_type : u8 {
-    hardware = 0x01,
-    acpi = 0x02,
-    messaging = 0x03,
-    media = 0x04,
-    bios_boot_specification = 0x05,
-    end_of_path = 0x7f
-};
 
-enum class device_path_end_subtype : u8 {
-    entire_path_end = 0xff,
-    instance_end = 0x01
-};
-
-enum class device_path_hardware_subtype : u8 {
-    pci = 0x01,
-    pccard = 0x02,
-    memory_mapped = 0x03,
-    vendor = 0x04,
-    controller = 0x05,
-    bmc = 0x06
-};
-
-enum class device_path_acpi_subtype : u8 {
-    acpi = 0x01,
-    expanded_acpi = 0x02,
-    acpi_adr = 0x03,
-    nvdimm = 0x04
-};
-
-enum class device_path_messaging_subtype : u8 {
-    atapi = 0x01,
-    scsi = 0x02,
-    fibre_channel = 0x03,
-    fibre_channel_ex = 0x15,
-    ieee1394 = 0x04,
-    usb = 0x05,
-    sata = 0x12,
-    usb_device_wwid = 0x10,
-    device_logical_unit = 0x11,
-    usb_device_class = 0x0f,
-    i2o = 0x06,
-    mac_address = 0x0b,
-    ipv4 = 0x0c,
-    ipv6 = 0x0d,
-    vlan = 0x14,
-    infiniband = 0x09,
-    uart = 0x0e,
-    vendor = 0x0a,
-    sas_ex = 0x16,
-    iscsi = 0x13,
-    nvme_namespace = 0x17,
-    uri = 0x18,
-    ufs = 0x19,
-    sd = 0x1a,
-    efi_bluetooth = 0x1b,
-    wireless = 0x1c,
-    emmc = 0x1d,
-    efi_bluetooth_le = 0x1e,
-    dns = 0x1f,
-    nvdimm_namespace = 0x20,
-    rest_service = 0x20 // NOTE: maybe an error in UEFI spec
-};
-
-enum class device_path_media_subtype : u8 {
-    hard_drive = 0x01,
-    cd_rom = 0x02,
-    vendor = 0x03,
-    file_path = 0x04,
-    media_protocol = 0x05,
-    piwg_firmware_file = 0x06,
-    piwg_firmware_volume = 0x07,
-    relative_offset = 0x08,
-    ram_disk = 0x09
-};
-
-enum class device_path_bios_boot_specification_subtype : u8 {
-    bios_boot_specification_version_1_01 = 0x01
-};
 
 struct device_path {
+
+    enum class node_type : u8 {
+        hardware = 0x01,
+        acpi = 0x02,
+        messaging = 0x03,
+        media = 0x04,
+        bios_boot_specification = 0x05,
+        end_of_path = 0x7f
+    };
+
+    enum class end_subtype : u8 {
+        entire_path_end = 0xff,
+        instance_end = 0x01
+    };
+
+    enum class hardware_subtype : u8 {
+        pci = 0x01,
+        pccard = 0x02,
+        memory_mapped = 0x03,
+        vendor = 0x04,
+        controller = 0x05,
+        bmc = 0x06
+    };
+
+    enum class acpi_subtype : u8 {
+        acpi = 0x01,
+        expanded_acpi = 0x02,
+        acpi_adr = 0x03,
+        nvdimm = 0x04
+    };
+
+    enum class messaging_subtype : u8 {
+        atapi = 0x01,
+        scsi = 0x02,
+        fibre_channel = 0x03,
+        fibre_channel_ex = 0x15,
+        ieee1394 = 0x04,
+        usb = 0x05,
+        sata = 0x12,
+        usb_device_wwid = 0x10,
+        device_logical_unit = 0x11,
+        usb_device_class = 0x0f,
+        i2o = 0x06,
+        mac_address = 0x0b,
+        ipv4 = 0x0c,
+        ipv6 = 0x0d,
+        vlan = 0x14,
+        infiniband = 0x09,
+        uart = 0x0e,
+        vendor = 0x0a,
+        sas_ex = 0x16,
+        iscsi = 0x13,
+        nvme_namespace = 0x17,
+        uri = 0x18,
+        ufs = 0x19,
+        sd = 0x1a,
+        efi_bluetooth = 0x1b,
+        wireless = 0x1c,
+        emmc = 0x1d,
+        efi_bluetooth_le = 0x1e,
+        dns = 0x1f,
+        nvdimm_namespace = 0x20,
+        rest_service = 0x20 // NOTE: maybe an error in UEFI spec
+    };
+
+    enum class media_subtype : u8 {
+        hard_drive = 0x01,
+        cd_rom = 0x02,
+        vendor = 0x03,
+        file_path = 0x04,
+        media_protocol = 0x05,
+        piwg_firmware_file = 0x06,
+        piwg_firmware_volume = 0x07,
+        relative_offset = 0x08,
+        ram_disk = 0x09
+    };
+
+    enum class bios_boot_specification_subtype : u8 {
+        bios_boot_specification_version_1_01 = 0x01
+    };
+
     u8 type;
-    u8 sub_type;
+    u8 subtype;
     u16 length;
 
     static constexpr guid protocol_guid = {0x09576e91, 0x6d3f, 0x11d2, {0x8e, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b}};
