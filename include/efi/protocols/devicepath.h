@@ -3,7 +3,6 @@
 
 namespace efi::protocols {
 
-
 struct device_path {
 
     enum class node_type : u8 {
